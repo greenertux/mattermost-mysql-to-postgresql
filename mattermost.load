@@ -1,7 +1,16 @@
 LOAD DATABASE
      FROM mysql://mattermost@localhost/mattermost
      INTO pgsql://postgres:migration@localhost/mattermost
-     
-WITH data_only
 
-SET SCHEMA 'public'
+ WITH data only, truncate, multiple readers per thread
+ ALTER SCHEMA 'mattermost' RENAME TO 'public'
+
+ BEFORE LOAD DO
+   $$ ALTER TABLE focalboard_blocks RENAME channel_id to workspace_id; $$,
+   $$ ALTER TABLE focalboard_blocks_history RENAME channel_id to workspace_id; $$,
+   $$ ALTER TABLE focalboard_schema_migrations ADD COLUMN IF NOT EXISTS dirty BOOLEAN; $$,
+   $$ ALTER TABLE focalboard_schema_migrations ALTER COLUMN dirty TYPE BOOLEAN using dirty::BOOLEAN; $$
+
+ AFTER LOAD DO
+   $$ ALTER TABLE focalboard_blocks RENAME workspace_id to channel_id; $$,
+   $$ ALTER TABLE focalboard_blocks_history RENAME workspace_id to channel_id; $$;
