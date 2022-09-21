@@ -6,9 +6,14 @@ Since version 7.3 Mattermost Boards no longer start up, when using MariaDB as da
 
 ## Create PostgreSQL database
 Of course you need to create a Postgres database to migrate into. I will not go into details here and instead focus on how to convert the data.
+Assumptions:
+- Database name is mattermost
+- You created a user mattermost to be used for the database connection from Mattermost to Postgres
+
 
 ## Migrate data using pg
 
 
 ## Some manual steps to make mattermost accept the converted database
-alter user mattermost set search_path to mattermost;
+alter database mattermost set search_path to public;
+grant all privileges on schema public to mattermost;
