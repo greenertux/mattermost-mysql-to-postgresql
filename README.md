@@ -12,7 +12,9 @@ Assumptions:
 
 
 ## Migrate data using pg
+Use MYSQL_PDW for complex passwords that would need escaping otherwise.
 
+`MYSQL_PWD='PASSWORD' pgloader mattermost.load`
 
 ## Some manual steps to make mattermost accept the converted database
 alter database mattermost set search_path to public;
