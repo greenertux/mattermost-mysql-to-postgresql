@@ -24,5 +24,4 @@ Use MYSQL_PWD for complex passwords that would need escaping otherwise.
 `MYSQL_PWD='PASSWORD' pgloader mattermost.load`
 
 ## Some manual steps to make mattermost accept the converted database
-alter database mattermost set search_path to public;
-grant all privileges on schema public to mattermost;
+delete from db_migrations where version=92;
