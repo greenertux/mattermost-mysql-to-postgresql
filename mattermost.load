@@ -1,0 +1,7 @@
+LOAD DATABASE
+     FROM mysql://mattermost@localhost/mattermost
+     INTO pgsql://postgres:migration@localhost/mattermost
+     
+WITH data_only
+
+SET SCHEMA 'public'
