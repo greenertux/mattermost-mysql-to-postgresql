@@ -12,7 +12,7 @@ Assumptions:
 
 
 ## Migrate data using pg
-Use MYSQL_PDW for complex passwords that would need escaping otherwise.
+Use MYSQL_PWD for complex passwords that would need escaping otherwise.
 
 `MYSQL_PWD='PASSWORD' pgloader mattermost.load`
 
