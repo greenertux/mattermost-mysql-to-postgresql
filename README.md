@@ -21,7 +21,7 @@ grant all privileges on database mattermost to mattermost;
 ## Start Mattermost to create database tables, schema etc.
 This ensures that we end up with a 100% accurate schema definition as Mattermost likes it. This is almost impossible by converting the database from MySQL/ MariaDB directly.
 
-## Migrate data using pg
+## Migrate data using pgloader
 Use MYSQL_PWD for complex passwords that would need escaping otherwise.
 
 `MYSQL_PWD='PASSWORD' pgloader mattermost.load`
