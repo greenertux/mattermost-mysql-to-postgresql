@@ -19,7 +19,8 @@ grant all privileges on database mattermost to mattermost;
 ```
 
 ## Start Mattermost to create database tables, schema etc.
-This ensures that we end up with a 100% accurate schema definition as Mattermost likes it. This is almost impossible by converting the database from MySQL/ MariaDB directly.
+First update the Mattermost configuration file to point to Postgres instead of MySQL / MariaDB
+This ensures that we end up with a 100% accurate schema definition as Mattermost likes it. This is almost impossible by converting the database from MySQL/ MariaDB directly. Afterwards stop Mattermost instance to import the data without it interfering.
 
 ## Migrate data using pgloader
 Use MYSQL_PWD for complex passwords that would need escaping otherwise.
@@ -28,3 +29,6 @@ Use MYSQL_PWD for complex passwords that would need escaping otherwise.
 
 ## Some manual steps to make mattermost accept the converted database
 delete from db_migrations where version=92;
+
+## Start Mattermost
+Now it should run using Postgres.
