@@ -30,7 +30,7 @@ Use MYSQL_PWD for complex passwords that would need escaping otherwise.
 ## Some manual SQL steps to make mattermost accept the converted database
 ```
 delete from db_migrations where version=92;
-drop table focalboard_schema_migrations;
+drop table focalboard_schema_migrations; # only do this if focalboard_schema_migrations_old_temp exists!
 ALTER TABLE focalboard_schema_migrations_old_temp RENAME TO focalboard_schema_migrations;
 ALTER TABLE focalboard_schema_migrations DROP COLUMN dirty;
 ```
