@@ -27,8 +27,11 @@ Use MYSQL_PWD for complex passwords that would need escaping otherwise.
 
 `MYSQL_PWD='PASSWORD' pgloader mattermost.load`
 
-## Some manual steps to make mattermost accept the converted database
+## Some manual SQL steps to make mattermost accept the converted database
 delete from db_migrations where version=92;
+drop table focalboard_schema_migrations;
+ALTER TABLE focalboard_schema_migrations_old_temp RENAME TO focalboard_schema_migrations;
+ALTER TABLE focalboard_schema_migrations DROP COLUMN dirty;
 
 ## Start Mattermost
 Now it should run using Postgres.
